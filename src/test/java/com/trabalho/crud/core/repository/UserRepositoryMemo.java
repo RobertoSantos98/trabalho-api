@@ -37,4 +37,9 @@ public class UserRepositoryMemo implements UserRepository {
   public void deleteById(Long id) {
     users.removeIf(user -> user.getId() == id);
   }
+
+  @Override
+  public void deleteAll() {
+    users.clear();
+  }
 }

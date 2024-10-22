@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.trabalho.crud.core.dto.UserDto;
 import com.trabalho.crud.core.entity.BusinessException;
+import com.trabalho.crud.core.entity.User;
 import com.trabalho.crud.core.mapper.UserMapper;
 import com.trabalho.crud.core.repository.UserRepository;
 
@@ -44,5 +45,11 @@ public class UserService {
     this.findById(id);
     repository.deleteById(id);
   }
+
+  public UserDto createUser(UserDto userDto) {
+    User user = mapper.toEntity(userDto); // Converter de UserDto para User
+    User savedUser = repository.save(user); // Salvar no repositório
+    return mapper.toDto(savedUser); // Retornar o UserDto salvo
+}
 
 }
