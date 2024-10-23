@@ -28,7 +28,7 @@ O "PetSoft" visa gerenciar informações de uma clínica veterinária, incluindo
 2. **Navegue até o diretório do projeto:**
 
    ```bash
-   cd diretorio-do-projeto
+   cd trabalho-api
    ```
 3. **Compile e execute o projeto:**
 
