@@ -32,9 +32,9 @@ class UserServiceTest {
     
     MockitoAnnotations.openMocks(this);
     
-    repository.save(User.builder().name("User 1").email("email1@email.com").build());
-    repository.save(User.builder().name("User 2").email("email2@email.com").build());
-    repository.save(User.builder().name("User 3").email("email3@email.com").build());
+    repository.save(User.builder().nome("User 1").cpf("123.456.789-10").animal("Cão").raça("Pastor Alemão").build());
+    repository.save(User.builder().nome("User 2").cpf("321.654.987-01").animal("Gato").raça("Siamês").build());
+    repository.save(User.builder().nome("User 3").cpf("456.123.789-11").animal("Furão").raça("Genérico").build());
   }
 
   @Test
@@ -52,8 +52,8 @@ class UserServiceTest {
     var user = repository.findAll().get(0);
     UserDto userDto = service.findById(user.getId());
 
-    assertEquals(user.getName(), userDto.getName(), "O nome no UserDto deve ser igual ao nome do usuário");
-    assertEquals(user.getEmail(), userDto.getEmail(), "O email no UserDto deve ser igual ao email do usuário");
+    assertEquals(user.getNome(), userDto.getNome(), "O nome no UserDto deve ser igual ao nome do usuário");
+    assertEquals(user.getCpf(), userDto.getCpf(), "O email no UserDto deve ser igual ao email do usuário");
     
   }
 
@@ -62,14 +62,14 @@ class UserServiceTest {
     void testCriarNovoUsuario() {
         // Criamos um novo UserDto para criar
         UserDto newUser = new UserDto();
-        newUser.setName("New User");
-        newUser.setEmail("newuser@email.com");
+        newUser.setNome("New User");
+        newUser.setCpf("147.258.369-00");
 
         // Chamamos o método de criação
         UserDto savedUser = service.createUser(newUser);
 
         // Verificamos se o usuário foi salvo corretamente
-        assertEquals("New User", savedUser.getName(), "O nome do usuário salvo deve ser 'New User'");
+        assertEquals("New User", savedUser.getNome(), "O nome do usuário salvo deve ser 'New User'");
         assertTrue(savedUser.getId() > 0, "O ID do usuário salvo deve ser maior que 0");
     }
 
@@ -97,15 +97,15 @@ void testDeletarUsuarioPorId() {
         // Criamos um novo UserDto para atualizar
         UserDto updatedUser = new UserDto();
         updatedUser.setId(existingUser.getId()); // Mantemos o ID do usuário existente
-        updatedUser.setName("Updated User"); // Novo nome
-        updatedUser.setEmail("updatedemail@email.com"); // Novo email
+        updatedUser.setNome("Updated User"); // Novo nome
+        updatedUser.setCpf("123.123.123-11"); // Novo cpf
 
         // Atualizamos o usuário
         UserDto result = service.update(existingUser.getId(), updatedUser);
 
         // Verificamos se o usuário foi atualizado corretamente
-        assertEquals("Updated User", result.getName(), "O nome do usuário deve ser 'Updated User'");
-        assertEquals("updatedemail@email.com", result.getEmail(), "O email do usuário deve ser 'updatedemail@email.com'");
+        assertEquals("Updated User", result.getNome(), "O nome do usuário deve ser 'Updated User'");
+        assertEquals("123.123.123-11", result.getCpf(), "O cpf do usuário deve ser '123.123.123-11'");
     }
 
 

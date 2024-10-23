@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class UserDto {
     private Long id;
-    private String name;
-    private String email;
+    private String nome;
+    private String cpf;
+    private String animal;
+    private String raça;
 }
